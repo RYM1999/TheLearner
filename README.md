@@ -1,3 +1,36 @@
+# TheLearnerTrainingCenter
+TheLearner Training Center project aim is to provide real-time knowledge for all the students who have basic knowledge of Salesforce and Looking for a real-time project. This project will also help to those professionals who are in cross-technology and wanted to switch to Salesforce with the help of this project they will gain knowledge.
+
+This project includes the following topics
+
+    1) Salesforce Admin :
+
+         - Objects & Relationships
+         - Sharing Rules, OWD & Roles
+         - Community
+
+   2) Salesforce Development :
+
+         -Apex Trigger
+         -Apex Batch Apex
+         -Future Method
+         -Integration ( Both Apex REST & REST API )
+
+   3) Lightning Web Component :    
+        "This Covers most of the lightning web component including"
+        -Events
+        -Custom Lookup
+        -Calling Apex in bot wire & imperative apex
+        -Using Web Component in Community
+        -Navigation & Toast Events
+        -etc.
+
+   4) Reusable Error Handling Framework
+
+   5) Salesforce Community - 
+          For the project, we are using Customer Community
+
+
 # Salesforce DX Project: Next Steps
 
 Now that you’ve created a Salesforce DX project, what’s next? Here are some documentation resources to get you started.
