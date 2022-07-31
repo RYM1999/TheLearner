@@ -1,0 +1,24 @@
+<template>
+    <lightning-card variant="Narrow" title="Upcoming Courses" icon-name="standard:event">
+        <div class="slds-m-around_small">
+            <template if:true={error}>{error}</template>
+        </div>
+        <div class="slds-m-around_small">
+            <c-lwcsearchcomponent search-label="Course Name" show-label="true" onsearch={handleSearch}>
+
+            </c-lwcsearchcomponent>
+            &nbsp;
+            <lightning-input type="datetime" value={startDateTime} label="Start Date Time" onchange={handleStartDate}>
+            </lightning-input>
+            &nbsp;
+            <c-lwcsearchcomponent search-label="Course Location" show-label="true" onsearch={handleLocationSearch}>
+
+            </c-lwcsearchcomponent>
+        </div>
+        <div class="slds-m-around_small">
+            <lightning-datatable key-field="id" data={recordsToDisplay} show-row-number-column hide-checkbox-column
+                columns={columnsList}>
+            </lightning-datatable>
+        </div>
+    </lightning-card>
+</template>

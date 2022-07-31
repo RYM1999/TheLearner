@@ -1,0 +1,95 @@
+.courseTitle {
+    background-color: rgb(249, 249, 159);
+    font-size: 25px;
+    border-radius: 10px;
+    font-family: cursive;
+  }
+  
+  .courseRSVP {
+    margin-top: 15px;
+    background-color: rgb(250, 238, 222);
+    font-size: 15px;
+    border-radius: 10px;
+    font-family: sans-serif;
+  
+  }
+  
+  .courseDetails {
+    margin-top: 0px;
+    font-family: sans-serif;
+    font-size: 20px;
+    color: black;
+  
+  }
+  
+  .enroll {
+    margin-top: 10px;
+  }
+  
+  .location {
+    font-size: 15px;
+  }
+  
+  .image {
+    margin-left: 200px;
+  }
+
+  .courseTitle {
+    background-color: rgb(249, 249, 159);
+    font-size: 25px;
+    border-radius: 10px;
+    font-family: cursive;
+}
+
+.courseENROLL {
+    margin-top: 15px;
+    background-color: rgb(250, 238, 222);
+    font-size: 15px;
+    border-radius: 10px;
+    font-family: sans-serif;
+
+}
+
+.courseDetails {
+    margin-top: 15px;
+    background-color: aliceblue;
+    font-family: sans-serif;
+    border-radius: 10px;
+    font-size: 20px;
+
+}
+
+.location {
+    background: antiquewhite;
+    color: black !important;
+    font-size: 15px;
+    margin-top: 15px;
+    border-radius: 10px;
+}
+
+
+.contactUs {
+    text-align: center;
+}
+
+
+.trainer {
+    margin-top: 15px;
+    background: aliceblue;
+    font-family: monospace;
+    font-size: 16px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.titlePhoto {
+    width: 150px;
+    height: 150px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    margin: 0 auto;
+    border-radius: 50%;
+    align-items: flex-end;
+
+}

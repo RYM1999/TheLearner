@@ -1,0 +1,101 @@
+<template>
+    <lightning-card variant="Narrow">
+
+        <!-- <c-slider-tile></c-slider-tile> -->
+        <!-- Upcoming course -->
+
+        <div class="slds-var-p-around_large slds-text-heading_large">Upcoming Courses</div>
+        <hr />
+        <lightning-layout vertical-align="center" multiple-rows>
+            <template if:true={upcomingCourses} for:each={upcomingCourses} for:item="course" for:index="index">
+                <lightning-layout-item key={course.Id} size="12" padding="around-small" small-device-size="12"
+                    medium-device-size="6" large-device-size="4">
+                    <!-- <c-course-tile course={course} image-url={images.course} onselect={handleCourseClick} ></c-course-tile> -->
+                    <!--<c-course-tile course={course} onselect={handleCourseClick}></c-course-tile> -->
+                    <div onclick={handleCourseClick} data-course-id={course.Id} class=" courseDiv slds-var-p-around_large">
+                        <div>
+                          <img class="center" src="https://global-uploads.webflow.com/5e157548d6f7910beea4e2d6/612438b343602775f1663b61_logo_4b163ea0-ed9e-4494-bfb1-77cbb34f217f-p-500.png" alt="Course title"/>
+                        </div>
+                        <p class="crs_name content slds-text-heading_medium slds-var-p-top_small">{course.Name__c}</p>
+                        
+                        
+                        <div class="slds-teext-heading_small">
+                          <p class="slds-var-p-top_medium">
+                            <lightning-icon icon-name="standard:event" size="small" title="Course Date"></lightning-icon>
+                            &nbsp;
+                             Start Date : 
+                            <lightning-formatted-date-time value={course.StartDateTime__c} year="numeric" month="short" day="2-digit" hour="2-digit" minute="2-digit">
+                            </lightning-formatted-date-time>
+                            
+                          </p>
+                          <p class="slds-var-p-top_medium">
+                            <lightning-icon icon-name="standard:event" size="small" title="Course Date"></lightning-icon>
+                            &nbsp;
+                            End Date :
+                            <lightning-formatted-date-time value={course.EndDateTime__c} year="numeric" month="short" day="2-digit" hour="2-digit" minute="2-digit">
+                            </lightning-formatted-date-time>
+                            
+                          </p>
+                          <p class="slds-var-p-top_medium">
+                            <lightning-icon icon-name="standard:location" size="small" title="Course Date"></lightning-icon>
+                            &nbsp;
+                            {course.Location__r.Name}
+                          </p>
+                          
+                          
+                          
+                        </div> 
+                         <div>
+                          <p class="slds-var-p-top_medium">
+                            {course.CourseContents__c}
+                          </p>
+                        </div>
+                        <lightning-formatted-text class="course_content" value={course.CourseContents__c} linkify ></lightning-formatted-text> 
+                      </div>
+                </lightning-layout-item>
+            </template>
+        </lightning-layout>
+        <!-- Past course -->
+        <hr />
+        <div class="slds-var-p-around_large slds-text-heading_large">Past courses</div>
+        <lightning-layout multiple-rows>
+            <template if:true={pastCourses} for:each={pastCourses} for:item="course" for:index="index">
+                <lightning-layout-item key={course.Id} size="12" padding="around-small" small-device-size="12"
+                    medium-device-size="6" large-device-size="4">
+                    <!-- <c-course-tile course={course} image-url={images.course} onselect={handleCourseClick} ></c-course-tile> -->
+                   <!-- <c-course-tile course={course} onselect={handleCourseClick}></c-course-tile> -->
+                   <div  data-course-id={course.Id} class=" courseDiv slds-var-p-around_large">
+                    <div>
+                      <img class="center" src="https://1000logos.net/wp-content/uploads/2020/09/Java-Logo.png" alt="Course title"/>
+                    </div>
+                    <p class=" crs_name content slds-text-heading_medium slds-var-p-top_small">{course.Name__c}</p>
+                    
+                     <div class="slds-teext-heading_small">
+                      <p class="slds-var-p-top_medium">
+                        <lightning-icon icon-name="standard:event" size="small" title="Course Date"></lightning-icon>
+                        &nbsp;
+                        End Date : 
+                        <lightning-formatted-date-time value={course.EndDateTime__c} year="numeric" month="short" day="2-digit">
+                        </lightning-formatted-date-time>
+                      </p> 
+                     <!--- <p class="slds-var-p-top_medium">
+                        <lightning-icon icon-name="standard:location" size="small" title="Course Date"></lightning-icon>
+                        &nbsp;
+                        {course.Location__r.Name}
+                      </p> -->
+                    </div> 
+                     <div>
+                      <p class="slds-var-p-top_medium">
+                        {course.CourseContents__c}
+                      </p>
+                    </div> 
+                    
+                    <div class="course_content">
+                         <lightning-formatted-text  value={course.CourseContents__c} linkify ></lightning-formatted-text>
+                    </div> 
+                  </div>
+                </lightning-layout-item>
+            </template>
+        </lightning-layout>
+    </lightning-card>
+</template>

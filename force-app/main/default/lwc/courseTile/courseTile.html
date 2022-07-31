@@ -1,0 +1,26 @@
+<template>
+    <div onclick={handleClick} data-event-id={course.Id} class="eventDiv slds-var-p-around_large">
+        <div>
+            <template if:true={course.TitleImageUrl__c}>
+                <img src={course.TitleImageUrl__c} alt="Course Title photo" />
+            </template>
+            <template if:false={course.TitleImageUrl__c}>
+                <img src={imageUrl} alt="Course Title photo" />
+            </template>
+        </div>
+        <p class="content slds-text-heading_medium slds-var-p-top_small">{course.Name}</p>
+        <div class="slds-text-heading_small">
+            <p class="slds-var-p-top_medium">
+                <lightning-icon icon-name="standard:event" size="small" title="Course Date"></lightning-icon>
+                &nbsp;
+                <lightning-formatted-date-time value={course.StartDateTime__c} year="numeric" month="short">
+                </lightning-formatted-date-time>
+            </p>
+            <p class="slds-var-p-top_medium">
+                <lightning-icon icon-name="standard:location" size="small" title="Location"></lightning-icon>
+                &nbsp;
+                {course.Location__r.Name}
+            </p>
+        </div>
+    </div>
+</template>

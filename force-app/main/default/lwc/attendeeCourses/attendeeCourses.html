@@ -1,0 +1,21 @@
+<template>
+    <lightning-card variant="Narrow" title="My Course" icon-name="standard:event">
+        <div class="slds-m-around_small">
+            <!-- Upcoming Course -->
+            <lightning-accordion allow-multiple-sections-open active-section-name="Upcoming Course">
+                <lightning-accordion-section name="Upcoming Course" label="Upcoming Course">
+                    <lightning-datatable key-field="id" data={events} show-row-number-column hide-checkbox-column
+                        columns={columnsList}>
+                    </lightning-datatable>
+                </lightning-accordion-section>
+
+                <!-- Past Course -->
+                <lightning-accordion-section name="Past Course" label="Past Course">
+                    <lightning-datatable key-field="id" data={past_course} show-row-number-column hide-checkbox-column
+                        columns={columnsList}>
+                    </lightning-datatable>
+                </lightning-accordion-section>
+            </lightning-accordion>
+        </div>
+    </lightning-card>
+</template>

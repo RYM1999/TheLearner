@@ -1,0 +1,24 @@
+<template>
+    <template if:true={trainer}>
+        <lightning-layout vertical-align="center">
+            <lightning-layout-item>
+                <template if:true={trainer.Picture__c}>
+                    <img src={trainer.Picture__c} alt="Profile photo" />
+                </template>
+                <template if:false={trainer.Picture__c}>
+                    <img src="https://www.pngitem.com/pimgs/m/41-414928_face-head-line-art-clip-and-white-symbol.png"
+                        alt="Profile photo" />
+                </template>
+            </lightning-layout-item>
+            <lightning-layout-item padding="around-small">
+                <p>{trainer.Name}</p>
+                <p>
+                    <lightning-formatted-email value={trainer.Email}></lightning-formatted-email>
+                </p>
+                <p>
+                    <lightning-formatted-rich-text value={trainer.AboutMe__c}></lightning-formatted-rich-text>
+                </p>
+            </lightning-layout-item>
+        </lightning-layout>
+    </template>
+</template>

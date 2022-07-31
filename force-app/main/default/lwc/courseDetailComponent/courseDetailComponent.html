@@ -1,0 +1,207 @@
+
+<template>
+
+    <div>
+      <lightning-spinner alternative-text="Loading" size="small" if:true={isSpinner}></lightning-spinner>
+  
+      <template if:true= {__courseDetails}>
+        
+      <!-- Course Title  -->
+      <div class=" courseTitle slds-var-p-around_large">
+        <p class="courseTitle">{__courseDetails.Name__c}</p>
+        <p><lightning-formatted-date-time value={__courseDetails.StartDateTime__c} year="numeric" month="short" day="2-digit" hour="2-digit" minute="2-digit">
+        </lightning-formatted-date-time> </p>
+               <!-- Course Details  -->
+      <div class=" courseDetails slds-var-p-around_large">
+        <lightning-formatted-rich-text value={__courseDetails.Course_Detail__c}>
+        </lightning-formatted-rich-text>
+      </div>
+      <!-- Course Location -->
+      <div class=" location slds-var-p-around_large">
+        <template if:false={__courseDetails.Location__c}>
+          <p>This is a virtual course</p>
+        </template>
+        <template if:true={__courseDetails.Location__c}>
+          <lightning-layout-item size="12" padding="around-small" small-device-size="12" medium-device-size="6" large-device-size="4">
+            <lightning-formatted-address 
+            street={__courseDetails.Location__r.Street__c}
+            city={__courseDetails.Location__r.City__c}
+            state={__courseDetails.Location__r.State__c}
+            country={__courseDetails.Location__r.Country__c}
+            >
+            </lightning-formatted-address>
+          </lightning-layout-item>
+        </template>
+  
+      </div>
+        <div class="enroll">
+          <lightning-layout-item size="12" padding="around-small" small-device-size="12" medium-device-size="6" large-device-size="4">
+            <template if:true={__showRSVPButton}>
+              <lightning-button variant="brand" label="Enroll Now" title="Enroll Now" onclick={handleRSVP}></lightning-button>
+              <p class="Button">{__showRSVPButton}</p>
+            </template>
+            <template if:false={__showRSVPButton}>
+              <lightning-button variant="brand" label="Login to Enroll" title="Login" onclick={handleLoginRedirect}></lightning-button>
+              <p class="Button">{__showRSVPButton}</p>
+            </template>
+            
+          </lightning-layout-item>
+        </div>
+      </div>
+  
+      <!-- Course RSVP -->
+      <!--
+        <div class=" courseRSVP slds-var-p-around_large">
+        <lightning-layout multiple-rows>
+          <lightning-layout-item size="12" padding="around-small" small-device-size="12" medium-device-size="6" large-device-size="4" >
+            The course is accepting RSVP's and the last date to Register is
+          </lightning-layout-item>
+          <br/>
+          <lightning-layout-item size="12" padding="around-small" small-device-size="12" medium-device-size="6" large-device-size="4">
+            <lightning-formatted-date-time value={__courseDetails.StartDateTime__c} year="numeric" month="short" day="2-digit" hour="2-digit" minute="2-digit">
+            </lightning-formatted-date-time>
+          </lightning-layout-item>
+          <lightning-layout-item size="12" padding="around-small" small-device-size="12" medium-device-size="6" large-device-size="4">
+            <lightning-button variant="brand" label="Enroll Now" title="Enroll Now" onclick={handleRSVP}></lightning-button>
+          </lightning-layout-item>
+        </lightning-layout>
+      </div>  -->
+                    <!--     enroll rsvp form try         -->
+                    
+      <div class="custom-modal" if:true={__showModal}>
+        <section role="dialog" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    
+                    <h2 class="slds-text-heading_medium slds-hyphenate">Enroll Now</h2>
+                </header>
+                <div class="slds-modal__content slds-p-around_medium">
+                    <c-rsvp-component course-id={__courseDetails.Id} onsuccess={handleRsvpSuccess} oncancel={handleCancel} ></c-rsvp-component>
+                </div>
+                
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+      </div>
+      
+      <!-- Course Enroll -->
+
+      <div class=" courseENROLL slds-var-p-around_large">
+        <lightning-layout multiple-rows>
+            <lightning-layout-item size="12" padding="around-small" small-device-size="12"
+                medium-device-size="6" large-device-size="4">
+                To Enroll This Course Click ENROLL NOW Buttton and the last date to Register is
+            </lightning-layout-item>
+            <br />
+            <lightning-layout-item size="12" padding="around-small" small-device-size="12" medium-device-size="6" large-device-size="4">
+                <lightning-formatted-date-time value={__courseDetails.StartDateTime__c} year="numeric" month="short" day="2-digit" hour="2-digit" minute="2-digit">
+                </lightning-formatted-date-time>
+              </lightning-layout-item>
+            <lightning-layout-item size="12" padding="around-small" small-device-size="12"
+                medium-device-size="6" large-device-size="4">
+                 
+              <!-- check if the course is completed -->
+              <!--
+              <template if:true={__courseDetails.StartDateTime__c}>
+                <p>
+                    Course has been completed.
+                </p>
+           
+              </template> -->
+              <template if:false={__courseDetails.StartDateTime__c}>
+                <template if:true={__rsvpCompleted}>
+                  <p>You are attending the course</p>
+                  <a class="slds-button slds-button_neutral" href="JavaScript:void(0);">
+                    un-rsvp from the course
+                  </a>
+                </template>
+                <template if:false={__rsvpCompleted}>
+                  <template if:true={__showRSVPButton}>
+                    <lightning-button variant="brand" label="Enroll Now" title="Enroll Now"
+                        onclick={handleRSVP}>
+                    </lightning-button>
+                </template>
+                <template if:false={__showRSVPButton}>
+                  <lightning-button variant="brand" label="Login To Enroll Now"
+                      title="Login TO Enroll Now" onclick={handleLoginRedirect}>
+                  </lightning-button>
+              </template>
+                </template>
+              </template>    
+            </lightning-layout-item>
+        </lightning-layout>
+    </div>
+   <!-- Course Trainer -->
+   <div class=" trainer slds-var-p-around_large">
+    <p class="titleCalse"> Trainers</p>
+    <lightning-layout multiple-rows>
+        <template if:true={_trainers} for:each={_trainers} for:item="trainer" for:index="index">
+            <lightning-layout-item key={trainer.Id} size="12" padding="around-small"
+                small-device-size="12" medium-device-size="6" large-device-size="4">
+                <p>
+                    <img class="titlePhoto"
+                        src="https://media-exp2.licdn.com/dms/image/C4D03AQEepXd21P05ag/profile-displayphoto-shrink_400_400/0/1657108554628?e=1662595200&v=beta&t=JDBvecU_gQGpPWD9z7rFnymVUvyWCo7U1rG17MBanPE"
+                        alt="Course Organizer">
+                </p>
+                <p>
+                    {trainer.Trainer__r.Name__c}
+                </p>
+                <p>
+                    {trainer.Trainer_r.Company__c}
+                </p>
+                <p>
+                    {trainer.Trainer_r.AboutMe__c}
+                </p>
+            </lightning-layout-item>
+        </template>
+    </lightning-layout>
+</div>
+<!-- Course Organizer -->
+<div class=" trainer slds-var-p-around_large">
+    <p class="titleCalse"> Course Organizers</p>
+    <p>
+        <img class="titlePhoto"
+            src="https://media-exp1.licdn.com/dms/image/C4E03AQFx17vAZIxE7A/profile-displayphoto-shrink_800_800/0/1643802880834?e=1664409600&v=beta&t=zERWIdcYIVicE5vzZcBNflcAKFs-QF69bt-S3pq8A_8"
+            alt="Course Organizer">
+            <img class="titlePhoto"
+            src="https://media-exp2.licdn.com/dms/image/C4D03AQEepXd21P05ag/profile-displayphoto-shrink_400_400/0/1657108554628?e=1662595200&v=beta&t=JDBvecU_gQGpPWD9z7rFnymVUvyWCo7U1rG17MBanPE"
+            alt="Course Organizer">
+    </p>  
+</div>
+      <!--  fetch course record id
+      <div class="slds-var-p-around_large">
+        <p>Course Record Id - {courseId} </p>
+        <p>Course Source - {source} </p>
+      </div> -->
+    
+      <!-- Contact Us Modal start -->
+
+      <div class="custom-modal" if:true={__showContactModal}>
+        <section role="dialog" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <h2 class="slds-text-heading_medium slds-hyphenate">Contact Us</h2>
+                </header>
+                <div class="slds-modal__content slds-var-p-around_medium">
+                    <!-- <c-contact-us-component organizer-email={__eventDetails.CourseOrganizer__r.Email__c}
+                        event-id={__courseDetails.Id}
+                        organizer-owner={__courseDetails.CourseOrganizer__r.OwnerId}
+                        onsuccess={handleContactUsSuccess} oncancel={handleContactCancel}>
+                    </c-contact-us-component> -->
+                </div>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </div>
+
+    <!-- Contact Us Modal End -->
+      <!-- Contact Us -->
+      <div class="contactUs slds-var-p-around_large">
+        <lightning-button variant="brand" icon-name="standard:email" label="Contact Us" title="Contact Us"
+            onclick={handleContactUs}>
+        </lightning-button>
+    </div>
+    </template>
+    </div>
+  
+  </template> 
